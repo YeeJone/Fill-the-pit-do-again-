@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>blockDrag</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+			border: 0;
+		}
+		#box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript">
+		// var winWidth = document.body.clientWidth; //获取视口宽度
+		// var winHeight = document.body.clientHeight; //获取去视口高度
+		var tBox = document.getElementById('box');  //获取被点击对象
+
+		var point = {
+			x:0, //点击时记录x坐标
+			y:0, //点击时记录Y坐标
+			state:0 //是否被拖拽
+		}
+
+		var getEvent = event => {return event || window.event};
+
+		tBox.addEventListener('mousedown',function (event) {
+			event = getEvent(event);
+			point.x = event.offsetX;
+			point.y = event.offsetY;
+			point.state = 1;
+		},false)
+
+		tBox.addEventListener('mousemove',function (event) {
+			event = getEvent(event);
+			if(point.state){
+				tBox.style.position = 'absolute';
+				point.endX = event.clientX;
+                point.endY = event.clientY;
+				tBox.style.top = point.endY - point.y + 'px';
+				tBox.style.left = point.endX - point.x + 'px';
+			}
+		},false)
+
+		tBox.addEventListener('mouseup',function (event) {
+			point.state = 0;
+		},false)
+
+		tBox.addEventListener('mouseover',function (event) {
+			point.state = 0;
+		})
+	</script>
+</body>
+</html>
