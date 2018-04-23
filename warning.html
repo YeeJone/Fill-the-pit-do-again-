@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>UI Question</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		#warning {
+		  position: relative;
+		  left: 50%;
+		  top: 200px;
+		  transform: translate(-50%, -50%);
+		  width: 200px;
+		  height: 200px;
+		  overflow: hidden;
+		  border-radius: 50%;
+		}
+
+		#warning .box {
+		  position: absolute;
+		  width: 0;
+		  height: 0;
+		  top: -73.2px;
+		  left: 0px;
+		  border-top: solid 173.2px rgb(246, 226, 54);
+		  border-left: solid 100px transparent;
+		  border-bottom: solid 173.2px black;
+		  border-right: solid 100px transparent;
+		} 
+
+		#warning .box:nth-child(1) {
+		  transform: rotate(0deg);
+		} 
+
+		#warning .box:nth-child(2) {
+		  transform: rotate(120deg);
+		} 
+
+		#warning .box:nth-child(3) {
+		  transform: rotate(240deg);
+		}
+
+	</style>
+</head>
+<body>
+	<div id="warning">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</body>
+</html>
