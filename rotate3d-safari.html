@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>translate 3d safari</title>
+	<style>
+		.container {
+			width: 100vw;
+			height: 800vh;
+		}
+		.bar {
+			position: fixed;
+			top: 100px;
+			width: 100%;
+			height: 50px;
+			background: red;
+			z-index: 99;
+		}
+		.box{
+			position: absolute;
+			top: 75px;
+			left: 50%;
+			width: 100px;
+			height: 100px;
+			background: yellow;
+			transform: translateX(-50%) rotate3d(1, 1, 1, 45deg);
+			z-index: 1;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="bar"></div>
+		<div class="box"></div>
+	</div>
+</body>
+</html>
