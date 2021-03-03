@@ -1,0 +1,10 @@
+.Job-root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  height: 30px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
