@@ -1,25 +1,18 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import useCounter from '../hooks/useCounter'
 import {getLocalTimeString} from '../utils/time'
+import {statusToImg} from '../constants'
 
-import css from './Job.css'
+import './Job.css'
 
-const Job = ({ name }) => {
-  const [time, setTime] = useState(0)
-  const [isPending, setIsPending] = useState(true)
-
-  const delay = isPending ? 1000 : null
-
-  useCounter(() => {
-    setTime(time + 1000)
-  }, delay)
+const Job = ({ data, style }) => {
+  const { name, status, time } = data || {}
 
   return (
-    <div className='Job-root'>
-      <div>
-        <span>svg</span>
+    <div className='Job-root' style={style}>
+      <div className='Job-content'>
+        <img className='Job-icon' src={statusToImg[status]} alt='icon' />
         <span>{name}</span>
       </div>
       <div>{getLocalTimeString(time)}</div>
@@ -28,7 +21,8 @@ const Job = ({ name }) => {
 }
 
 Job.propTypes = {
-  name: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  style: PropTypes.object
 }
 
 export default Job

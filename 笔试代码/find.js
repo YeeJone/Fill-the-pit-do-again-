@@ -8,35 +8,40 @@ var data = [
   {userId: 19, title: 'title2'}
 ];
 
-var find = function(origin) {
-  const where = filterOpt => {
-    let filterOrigin
-
-    if (!Array.isArray(origin) || !Boolean(origin.length)) filterOrigin = []
-
-    filterOrigin = origin.filter(item => {
-      let condition = true
-      for (key in filterOpt) {
-        condition = item.hasOwnProperty(key) ? (condition && new RegExp(filterOpt[key]).test(item[key])) : condition  
-      }
-      return condition
-    })
-
-    const orderBy = (orderAttr, orderType = 'asc') => {
-      filterOrigin.sort((prev, next) => { 
-        if (orderType.toLowerCase() === 'desc') {
-          return next[orderAttr] - prev[orderAttr]
-        }
-        return prev[orderAttr] - next[orderAttr]
-      })
-      return filterOrigin
-    }
-
-    return { orderBy }
-  }
-
-  return { where }
+function OriginFilter(origin) {
+  this.filterOrigin = origin
 }
+
+var find = origin => {
+  return new OriginFilter(origin)
+}
+
+OriginFilter.prototype.where = function(filterOpt) {
+  if (!Array.isArray(this.filterOrigin) || !Boolean(this.filterOrigin.length)) this.filterOrigin = []
+
+  this.filterOrigin = this.filterOrigin.filter(item => {
+    let condition = true
+    for (key in filterOpt) {
+      condition = item.hasOwnProperty(key) ? (condition && new RegExp(filterOpt[key]).test(item[key])) : condition  
+    }
+    return condition
+  })
+
+  return this
+}
+
+OriginFilter.prototype.orderBy = function(orderAttr, orderType = 'asc') {
+  
+  this.filterOrigin.sort((prev, next) => { 
+    if (orderType.toLowerCase() === 'desc') {
+      return next[orderAttr] - prev[orderAttr]
+    }
+    return prev[orderAttr] - next[orderAttr]
+  })
+
+  return this.filterOrigin
+}
+
 // 查找 data 中，符合条件的数据，并进行排序
 var result = find(data).where({
   'title': /\d$/
